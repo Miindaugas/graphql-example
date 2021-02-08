@@ -2,11 +2,17 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import currentBooksQuery from "./gql/currentBooks.graphql";
+import {useQuery} from "@apollo/client";
+
 function App() {
+
+  const {error,data} = useQuery(currentBooksQuery)
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo} className="App-logo" alt="logo"/>
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
@@ -18,6 +24,11 @@ function App() {
         >
           Learn React
         </a>
+         <pre className="App-body">
+          <code>
+            {JSON.stringify(data || error, null, 2)}
+          </code>
+        </pre>
       </header>
     </div>
   );
